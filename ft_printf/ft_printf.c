@@ -47,7 +47,7 @@ int	ft_putnbr(int nbr)
 	return (counter);
 }
 
-int	ft_putnbr_base(int nbr, char *base, int nbase)
+int	ft_putnbr_base(long long int nbr, char *base, int nbase)
 {
 	int	counter;
 
@@ -59,9 +59,15 @@ int	ft_putnbr_base(int nbr, char *base, int nbase)
 		counter++;
 	}
 	if (nbr >= nbase)
+	{
 		counter += ft_putnbr_base(nbr / nbase, base, nbase);
-	write(1, &base[nbr % nbase], 1);
-	counter++;
+		counter += ft_putnbr_base(nbr % nbase, base, nbase);
+	}
+	else
+	{
+		write(1, &base[nbr % nbase], 1);
+		counter++;
+	}
 	return (counter);
 }
 
@@ -75,7 +81,7 @@ static int	convert(int i, const char *input, va_list args)
 	else if (input[i + 1] == 'd')
 		c += ft_putnbr(va_arg(args, int));
 	else if (input[i + 1] == 'x')
-		c += ft_putnbr_base(va_arg(args, long int), "0123456789abcdef", 16);
+		c += ft_putnbr_base(va_arg(args, unsigned int), "0123456789abcdef", 16);
 	return (c);
 }
 
@@ -115,11 +121,11 @@ int	main(void)
 
 	ft_printf("%s\n", "toto");
 	ft_printf("Magic %s is %d\n", "number", 42);
-	counter1 = ft_printf("Hexadecimal for %d is %x\n", 42, 42);
+	counter1 = ft_printf("Hexadecimal for is %x\n", -4294967295);
 	printf("counter = %d\n", counter1);
 	printf("Expect:-------------------\n");
-	printf("%s\n", "toto");
-	printf("Magic %s is %d\n", "number", 42);
-	counter2 = printf("Hexadecimal for %d is %x\n", 42, 42);
+	// printf("%s\n", "toto");
+	// printf("Magic %s is %d\n", "number", 42);
+	counter2 = ft_printf("Hexadecimal for is %x\n", -4294967295);
 	printf("counter = %d\n", counter2);
 }
