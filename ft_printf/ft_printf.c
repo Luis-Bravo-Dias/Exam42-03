@@ -27,6 +27,11 @@ int	ft_putnbr(int nbr)
 	char	c;
 
 	counter = 0;
+	if (nbr == -2147483648)
+	{
+		counter += ft_putstr("-2147483648");
+		return (counter);
+	}
 	if (nbr < 0)
 	{
 		nbr *= -1;
@@ -52,12 +57,12 @@ int	ft_putnbr_base(long long int nbr, char *base, int nbase)
 	int	counter;
 
 	counter = 0;
-	if (nbr < 0)
-	{
-		nbr *= -1;
-		write(1, "-", 1);
-		counter++;
-	}
+	// if (nbr < 0)
+	// {
+	// 	nbr *= -1;
+	// 	write(1, "-", 1);
+	// 	counter++;
+	// }
 	if (nbr >= nbase)
 	{
 		counter += ft_putnbr_base(nbr / nbase, base, nbase);
@@ -114,18 +119,18 @@ int	ft_printf(const char *input, ...)
 	return (counter);
 }
 
-int	main(void)
-{
-	int	counter1;
-	int	counter2;
+// int	main(void)
+// {
+// 	int	counter1;
+// 	int	counter2;
 
-	ft_printf("%s\n", "toto");
-	ft_printf("Magic %s is %d\n", "number", 42);
-	counter1 = ft_printf("Hexadecimal for is %x\n", -4294967295);
-	printf("counter = %d\n", counter1);
-	printf("Expect:-------------------\n");
-	// printf("%s\n", "toto");
-	// printf("Magic %s is %d\n", "number", 42);
-	counter2 = ft_printf("Hexadecimal for is %x\n", -4294967295);
-	printf("counter = %d\n", counter2);
-}
+// 	ft_printf("%s\n", "toto");
+// 	ft_printf("Magic %s is %d\n", "number", 42);
+// 	counter1 = ft_printf("Hexadecimal for is %x\n", -4294967295);
+// 	printf("counter = %d\n", counter1);
+// 	printf("Expect:-------------------\n");
+// 	// printf("%s\n", "toto");
+// 	// printf("Magic %s is %d\n", "number", 42);
+// 	counter2 = ft_printf("Hexadecimal for is %x\n", -4294967295);
+// 	printf("counter = %d\n", counter2);
+// }
