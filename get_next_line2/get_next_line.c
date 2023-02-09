@@ -3,7 +3,7 @@
 # include <unistd.h>
 # include <limits.h>
 
-ft_strlen(char *str)
+int	ft_strlen_nl(char *str)
 {
 	int	i;
 
@@ -17,13 +17,13 @@ ft_strlen(char *str)
 	return (i);
 }
 
-char	*ft_strjoin(char *str1, char *str2)
+char	*ft_strjoin_nl(char *str1, char *str2)
 {
 	int		i;
 	char	*new_str;
 
 	i = 0;
-	new_str = malloc(ft_strlen(str1) + ft_strlen(str2) + 1);
+	new_str = malloc(ft_strlen_nl(str1) + ft_strlen_nl(str2) + 1);
 	if (!new_str)
 		return (NULL);
 	while (str1 && str1[i])
@@ -42,7 +42,7 @@ char	*ft_strjoin(char *str1, char *str2)
 	return (new_str);
 }
 
-int	clear_mem(char *buffer)
+int	is_nl_mem_null(char *buffer)
 {
 	int	i;
 	int	next_line;
@@ -78,8 +78,8 @@ char	*get_next_line(int fd)
 	line = NULL;
 	while (buffer[0] || read(fd, buffer, BUFFER_SIZE) > 0)
 	{
-		line = ft_strjoin(line, buffer);
-		if (clear_mem(buffer))
+		line = ft_strjoin_nl(line, buffer);
+		if (is_nl_mem_null(buffer))
 			break ;
 	}
 	return (line);
